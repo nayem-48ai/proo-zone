@@ -1,1500 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>TNxBD - Premium Subdomain Service</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Primary Colors */
-            --primary: #4361ee;
-            --primary-light: #4895ef;
-            --primary-dark: #3a0ca3;
-            --secondary: #f72585;
-            --accent: #4cc9f0;
-            --success: #06d6a0;
-            
-            /* Neutral Colors */
-            --dark: #121826;
-            --dark-light: #1f2937;
-            --gray: #6b7280;
-            --gray-light: #9ca3af;
-            --light: #f3f4f6;
-            --white: #ffffff;
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
-            --gradient-accent: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
-            
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
-            --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.2);
-            
-            /* Border Radius */
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
-            --radius-full: 9999px;
-            
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 4rem;
-
-            /* Animation */
-            --transition-fast: 0.2s ease;
-            --transition-base: 0.3s ease;
-            --transition-slow: 0.5s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
-            font-size: 16px;
-            padding-top: 80px; /* Navbar height adjustment */
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: all var(--transition-base);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-        }
-
-        /* Buttons with Ripple Effect */
-        .btn {
-            position: relative;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            margin: 0;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            text-align: center;
-            white-space: nowrap;
-            gap: 8px;
-            isolation: isolate;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: -1;
-        }
-
-        .btn:active::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--gradient-accent);
-            color: var(--white);
-        }
-
-        .btn-large {
-            padding: 16px 32px;
-            font-size: 18px;
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        /* Navigation - Enhanced */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-sm);
-            z-index: 1000;
-            padding: 10px 5px;
-        }
-
-        .navbar-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand-logo {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 24px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 1001;
-        }
-
-        .nav-toggle {
-            display: block;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--dark);
-            cursor: pointer;
-            padding: 8px;
-            z-index: 1001;
-        }
-
-        .nav-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--white);
-            padding: 100px var(--space-md) var(--space-md);
-            transform: translateX(-100%);
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--transition-base);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .nav-menu.active {
-            transform: translateX(0);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .nav-menu ul {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-xs);
-        }
-
-        .nav-item {
-            margin-bottom: 0;
-            width: 100%;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            color: var(--dark);
-            transition: all var(--transition-base);
-        }
-
-        .nav-link:hover {
-            background: var(--light);
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .nav-menu .btn {
-            margin-top: 8px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 60px 0 80px;
-            background: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: var(--gradient-primary);
-            opacity: 0.1;
-            border-radius: 50%;
-            transform: translate(50%, -50%);
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-title {
-            font-size: 32px;
-            margin-bottom: var(--space-md);
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-description {
-            font-size: 16px;
-            color: var(--gray);
-            margin-bottom: var(--space-xl);
-            line-height: 1.8;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-xl);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-sm);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            background: var(--light);
-            padding: var(--space-md);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            transition: all var(--transition-base);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-number {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--gray);
-        }
-
-        /* Domains Section */
-        .section {
-            padding: var(--space-2xl) 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-
-        .section-title {
-            font-size: 28px;
-            color: var(--dark);
-            margin-bottom: var(--space-sm);
-        }
-
-        .section-subtitle {
-            font-size: 16px;
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-        }
-
-        .domain-cards {
-            display: grid;
-            gap: var(--space-lg);
-            padding: 0 var(--space-sm);
-        }
-
-        .domain-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-            border: 2px solid transparent;
-            transition: all var(--transition-base);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .domain-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--primary);
-        }
-
-        .domain-card.featured {
-            border: 2px solid transparent;
-            background: linear-gradient(var(--white), var(--white)) padding-box,
-                        var(--gradient-accent) border-box;
-            animation: borderGlow 3s infinite alternate;
-        }
-
-        @keyframes borderGlow {
-            0% { box-shadow: 0 0 5px var(--secondary); }
-            100% { box-shadow: 0 0 20px var(--secondary); }
-        }
-
-        .domain-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--gradient-accent);
-            color: var(--white);
-            padding: 4px 12px;
-            border-radius: var(--radius-full);
-            font-size: 12px;
-            font-weight: 600;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .domain-name {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: var(--space-sm);
-        }
-
-        .domain-price {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--dark);
-            margin: var(--space-md) 0;
-            line-height: 1;
-        }
-
-        .domain-price span {
-            font-size: 16px;
-            color: var(--gray);
-            font-weight: 500;
-        }
-
-        .domain-features {
-            margin: var(--space-lg) 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--light);
-            font-size: 14px;
-        }
-
-        .feature-item:last-child {
-            border-bottom: none;
-        }
-
-        .feature-icon {
-            color: var(--success);
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        /* Features Section */
-        .features-grid {
-            display: grid;
-            gap: var(--space-lg);
-            padding: 0 var(--space-sm);
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-base);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon-wrapper {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-md);
-            color: var(--white);
-            font-size: 28px;
-            transition: all var(--transition-base);
-        }
-
-        .feature-card:hover .feature-icon-wrapper {
-            transform: rotate(360deg) scale(1.1);
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: var(--gradient-dark);
-            color: var(--white);
-            padding: var(--space-2xl) 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .cta-title {
-            font-size: 28px;
-            margin-bottom: var(--space-md);
-            color: var(--white);
-            position: relative;
-        }
-
-        .cta-description {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: var(--space-xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            padding: 0 var(--space-md);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: var(--space-2xl) 0 var(--space-xl);
-        }
-
-        .footer-grid {
-            display: grid;
-            gap: var(--space-xl);
-            padding: 0 var(--space-sm);
-        }
-
-        .footer-logo {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-description {
-            color: var(--gray-light);
-            margin-bottom: var(--space-md);
-            font-size: 14px;
-        }
-
-        .footer-links-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--white);
-        }
-
-        .footer-links-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer-link {
-            color: var(--gray-light);
-            transition: all var(--transition-base);
-            font-size: 14px;
-        }
-
-        .footer-link:hover {
-            color: var(--white);
-            transform: translateX(5px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: var(--space-sm);
-            margin-top: var(--space-md);
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: all var(--transition-base);
-            font-size: 16px;
-        }
-
-        .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-3px) scale(1.1);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: var(--space-xl);
-            margin-top: var(--space-xl);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray-light);
-            font-size: 14px;
-        }
-
-        /* Developer Section */
-        .developer-section {
-            background: var(--white);
-            padding: var(--space-xl) 0;
-            text-align: center;
-        }
-
-        .developer-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: var(--space-xl) var(--space-lg);
-            background: var(--light);
-            border-radius: var(--radius-lg);
-            transition: all var(--transition-base);
-        }
-
-        .developer-card:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .developer-name {
-            font-size: 28px;
-            font-weight: 800;
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Responsive Breakpoints */
-
-        /* Small devices (tablets, 600px and up) */
-        @media (min-width: 600px) {
-            .hero-title {
-                font-size: 36px;
-            }
-            
-            .hero-description {
-                font-size: 18px;
-            }
-            
-            .hero-buttons {
-                flex-direction: row;
-                justify-content: center;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: var(--space-md);
-            }
-            
-            .stat-number {
-                font-size: 32px;
-            }
-            
-            .stat-label {
-                font-size: 14px;
-            }
-            
-            .domain-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .section-title {
-                font-size: 32px;
-            }
-        }
-
-        /* Medium devices (tablets, 768px and up) */
-        @media (min-width: 768px) {
-            body {
-                padding-top: 70px;
-            }
-            
-            .container {
-                padding: 0 var(--space-lg);
-            }
-            
-            .hero {
-                padding: 40px 0 80px;
-            }
-            
-            .hero-title {
-                font-size: 42px;
-            }
-            
-            .hero-description {
-                font-size: 18px;
-            }
-            
-            .section-title {
-                font-size: 36px;
-            }
-            
-            .section-subtitle {
-                font-size: 18px;
-            }
-            
-            .nav-toggle {
-                display: none;
-            }
-            
-            .nav-menu {
-                position: static;
-                width: auto;
-                height: auto;
-                background: transparent;
-                padding: 0;
-                transform: none;
-                opacity: 1;
-                visibility: visible;
-                box-shadow: none;
-                overflow: visible;
-            }
-            
-            .nav-menu ul {
-                flex-direction: row;
-                align-items: center;
-                gap: var(--space-xs);
-            }
-            
-            .nav-item {
-                width: auto;
-            }
-            
-            .nav-link {
-                padding: 8px 16px;
-                white-space: nowrap;
-            }
-            
-            .nav-link:hover {
-                transform: translateY(-2px);
-            }
-            
-            .nav-menu .btn {
-                width: auto;
-                margin-top: 0;
-                margin-left: 8px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Large devices (desktops, 992px and up) */
-        @media (min-width: 992px) {
-            .hero-title {
-                font-size: 48px;
-            }
-            
-            .hero-description {
-                font-size: 20px;
-            }
-            
-            .domain-cards {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .features-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .hero::before {
-                width: 300px;
-                height: 300px;
-            }
-            
-            .cta-title {
-                font-size: 36px;
-            }
-            
-            .cta-description {
-                font-size: 18px;
-            }
-        }
-
-        /* Extra large devices (large desktops, 1200px and up) */
-        @media (min-width: 1200px) {
-            .container {
-                padding: 0;
-            }
-            
-            .hero-content {
-                max-width: 900px;
-            }
-            
-            .hero-title {
-                font-size: 56px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --dark: #f3f4f6;
-                --light: #121826;
-                --white: #1f2937;
-                --gray: #9ca3af;
-            }
-            
-            body {
-                background-color: #121826;
-                color: #f3f4f6;
-            }
-            
-            .navbar {
-                background: rgba(31, 41, 55, 0.95);
-            }
-            
-            .domain-card,
-            .feature-card,
-            .developer-card {
-                background: #1f2937;
-            }
-            
-            .hero {
-                background: #1f2937;
-            }
-            
-            .nav-menu {
-                background: #1f2937;
-            }
-        }
-
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-0 {
-            margin-bottom: 0;
-        }
-
-        .mt-2 {
-            margin-top: var(--space-md);
-        }
-
-        .mt-4 {
-            margin-top: var(--space-xl);
-        }
-
-        /* Animation Keyframes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        /* Loading States */
-        .loading {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            to {
-                left: 100%;
-            }
-        }
-
-        /* Ripple Animation */
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>tnxbd.top · aesthetic fluidity</title>
+  <!-- ultra-lightweight: Inter font + minimal style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <style>
+    /* reset & base — 100/100 performance mindset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #0f0c1f 0%, #2a1b3c 40%, #4a2c5f 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.2;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* canvas (3d blob) sits behind everything */
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none; /* so buttons stay clickable */
+    }
+
+    /* main content layer */
+    .content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 700px;
+      padding: 1.5rem;
+      margin: 1rem;
+      pointer-events: none; /* children can override */
+    }
+
+    /* glassmorphic card — deep blur + soft border */
+    .glass-card {
+      background: rgba(20, 15, 35, 0.3);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-radius: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      padding: 3rem 2rem;
+      text-align: center;
+      pointer-events: auto;
+      transition: transform 0.4s ease;
+    }
+
+    /* elegant entrance fade + slide (css-only) */
+    .glass-card > * {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+    .glass-card h1 { animation-delay: 0.1s; }
+    .glass-card .subtitle { animation-delay: 0.2s; }
+    .glass-card .button-wrapper { animation-delay: 0.35s; }
+    .glass-card .meta-footer { animation-delay: 0.5s; }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: clamp(2.2rem, 10vw, 4rem);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(130deg, #ffffff 0%, #d6c6f0 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(180, 130, 255, 0.3);
+    }
+
+    .subtitle {
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 4px;
+      word-spacing: 6px;
+      margin-bottom: 2.8rem;
+      color: rgba(255, 245, 255, 0.7);
+    }
+
+    /* button container + states */
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 2.2rem 0 1.8rem;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 1rem 2.8rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 6px;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(210, 150, 255, 0.3);
+      min-width: 240px;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      background: rgba(25, 20, 35, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      /* pulse animation (subtle) */
+      animation: gentlePulse 3s infinite ease-in-out;
+    }
+
+    .primary-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0) 10%,
+        rgba(255, 255, 255, 0.2) 30%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.2) 70%,
+        rgba(255, 255, 255, 0) 90%
+      );
+      transform: rotate(25deg) translateX(-100%) translateY(-30%);
+      transition: transform 0.7s ease;
+      pointer-events: none;
+    }
+
+    /* liquid hover effect */
+    .primary-btn:hover::after {
+      transform: rotate(25deg) translateX(10%) translateY(-10%);
+    }
+
+    .primary-btn:hover {
+      background: rgba(50, 35, 70, 0.6);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 35px rgba(200, 160, 255, 0.6);
+      transform: scale(1.02);
+    }
+
+    @keyframes gentlePulse {
+      0% { box-shadow: 0 0 20px rgba(180, 130, 255, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(200, 150, 255, 0.6); }
+      100% { box-shadow: 0 0 20px rgba(180, 130, 255, 0.3); }
+    }
+
+    /* loading / redirecting state */
+    .status-area {
+      min-height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: rgba(255, 240, 255, 0.9);
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-top: 2px solid #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .proceed-link {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.9rem 2.4rem;
+      border-radius: 40px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      transition: 0.25s;
+      display: inline-block;
+    }
+
+    .proceed-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: white;
+    }
+
+    .meta-footer {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      opacity: 0.4;
+      margin-top: 2rem;
+    }
+
+    /* preloader (elegant, brief) */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0b0817;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: opacity 0.8s ease, visibility 0.8s;
+      backdrop-filter: blur(10px);
+    }
+    .preloader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .preloader-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(255, 200, 255, 0.15);
+      border-top: 3px solid #c7a4ff;
+      border-radius: 50%;
+      animation: spin 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .preloader-text {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      color: #b6a2d6;
+      font-weight: 300;
+    }
+
+    /* hide preloader after loading */
+    .loaded #preloader {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 480px) {
+      .glass-card { padding: 2rem 1.5rem; }
+      .primary-btn { font-size: 1.1rem; letter-spacing: 4px; min-width: 200px; }
+    }
+  </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container navbar-container">
-            <a href="index.php" class="brand-logo">
-                <i class="fas fa-globe"></i>
-                TNxBD
-            </a>
-            
-            <button class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <div class="nav-menu" id="navMenu">
-                <ul>
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#domains" class="nav-link">Domains</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#features" class="nav-link">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#developer" class="nav-link">Developer</a>
-                    </li>
-                    
-                    <?php if(isset($_SESSION['user_id'])): ?>
-                        <li class="nav-item">
-                            <a href="clientarea.php" class="btn btn-primary">
-                                <i class="fas fa-tachometer-alt"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item">
-                            <a href="login.php" class="btn btn-primary">
-                                <i class="fas fa-user"></i>
-                                Login
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </div>
+<body id="body">
+  <!-- elegant preloader (brief) -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-spinner"></div>
+      <div class="preloader-text">tnxbd</div>
+    </div>
+  </div>
+
+  <!-- three.js canvas container -->
+  <div id="canvas-container"></div>
+
+  <!-- main UI -->
+  <div class="content">
+    <div class="glass-card">
+      <h1>TNXBD.TOP</h1>
+      <div class="subtitle">a e s t h e t i c &nbsp; f l u i d i t y</div>
+
+      <!-- dynamic button area -->
+      <div class="button-wrapper" id="buttonWrapper">
+        <button class="primary-btn" id="mainActionBtn">EXPLORE</button>
+        <div class="status-area" id="statusArea" style="display: none;">
+          <div class="spinner"></div>
+          <span>redirecting ...</span>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content fade-in">
-                <h1 class="hero-title">Get Your Premium Subdomain Today</h1>
-                <p class="hero-description">
-                    Instant activation, enterprise-grade security, and 99.9% uptime guarantee. 
-                    Perfect for developers, bloggers, and businesses of all sizes.
-                </p>
-                
-                <div class="hero-buttons">
-                    <a href="#domains" class="btn btn-primary btn-large">
-                        <i class="fas fa-search"></i>
-                        View Domains
-                    </a>
-                    <a href="login.php" class="btn btn-secondary btn-large">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Free
-                    </a>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number"><?php echo $user_count ?? '1k'; ?>+</div>
-                        <div class="stat-label">Happy Users</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number"><?php echo $domain_count ?? '500'; ?>+</div>
-                        <div class="stat-label">Active Domains</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">99.9%</div>
-                        <div class="stat-label">Uptime</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Support</div>
-                    </div>
-                </div>
-            </div>
+        <!-- proceed button (hidden initially) -->
+        <div id="proceedContainer" style="display: none;">
+          <a href="https://dist.tnxbd.top" class="proceed-link" target="_blank" rel="noopener">→ PROCEED TO DIST</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Domains Section -->
-    <section class="section" id="domains">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Popular Domains</h2>
-                <p class="section-subtitle">Choose from our most popular domain extensions</p>
-            </div>
-            
-            <div class="domain-cards">
-                <?php if (isset($domains) && $domains->num_rows > 0): ?>
-                    <?php $counter = 0; ?>
-                    <?php while($row = $domains->fetch_assoc()): ?>
-                    <?php 
-                        $counter++;
-                        $isFeatured = $counter == 2;
-                    ?>
-                    <div class="domain-card <?php echo $isFeatured ? 'featured' : ''; ?> fade-in">
-                        <?php if ($isFeatured): ?>
-                            <div class="domain-badge">MOST POPULAR</div>
-                        <?php endif; ?>
-                        
-                        <h3 class="domain-name">.<?php echo htmlspecialchars($row['domain_name']); ?></h3>
-                        
-                        <div class="domain-price">
-                            <?php echo $row['price_currency'] ?? '$'; ?><?php echo number_format($row['price_per_month'] ?? 5, 0); ?>
-                            <span>/month</span>
-                        </div>
-                        
-                        <ul class="domain-features">
-                            <li class="feature-item">
-                                <i class="fas fa-check feature-icon"></i>
-                                <span>Instant Activation</span>
-                            </li>
-                            <li class="feature-item">
-                                <i class="fas fa-check feature-icon"></i>
-                                <span>Free SSL Certificate</span>
-                            </li>
-                            <li class="feature-item">
-                                <i class="fas fa-check feature-icon"></i>
-                                <span>24/7 Support</span>
-                            </li>
-                            <li class="feature-item">
-                                <i class="fas fa-check feature-icon"></i>
-                                <span>99.9% Uptime</span>
-                            </li>
-                            <li class="feature-item">
-                                <i class="fas fa-check feature-icon"></i>
-                                <span>Cloudflare Protection</span>
-                            </li>
-                        </ul>
-                        
-                        <?php if(isset($_SESSION['user_id'])): ?>
-                            <a href="new-domain.php?domain=<?php echo $row['domain_name']; ?>" class="btn btn-primary btn-full">
-                                <i class="fas fa-shopping-cart"></i>
-                                Get This Domain
-                            </a>
-                        <?php else: ?>
-                            <a href="login.php?ref=<?php echo $ref_code ?? ''; ?>" class="btn btn-primary btn-full">
-                                <i class="fas fa-sign-in-alt"></i>
-                                Login to Purchase
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <!-- Sample domain cards for demonstration -->
-                    <div class="domain-card fade-in">
-                        <h3 class="domain-name">.com</h3>
-                        <div class="domain-price">$5 <span>/month</span></div>
-                        <ul class="domain-features">
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>Instant Activation</span></li>
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>Free SSL Certificate</span></li>
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>24/7 Support</span></li>
-                        </ul>
-                        <a href="login.php" class="btn btn-primary btn-full">Login to Purchase</a>
-                    </div>
-                    <div class="domain-card featured fade-in">
-                        <div class="domain-badge">MOST POPULAR</div>
-                        <h3 class="domain-name">.dev</h3>
-                        <div class="domain-price">$8 <span>/month</span></div>
-                        <ul class="domain-features">
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>Instant Activation</span></li>
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>Free SSL Certificate</span></li>
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>24/7 Support</span></li>
-                        </ul>
-                        <a href="login.php" class="btn btn-primary btn-full">Login to Purchase</a>
-                    </div>
-                    <div class="domain-card fade-in">
-                        <h3 class="domain-name">.app</h3>
-                        <div class="domain-price">$7 <span>/month</span></div>
-                        <ul class="domain-features">
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>Instant Activation</span></li>
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>Free SSL Certificate</span></li>
-                            <li class="feature-item"><i class="fas fa-check feature-icon"></i> <span>24/7 Support</span></li>
-                        </ul>
-                        <a href="login.php" class="btn btn-primary btn-full">Login to Purchase</a>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-    </section>
+      <div class="meta-footer">✦ smooth gateway ✦</div>
+    </div>
+  </div>
 
-    <!-- Features Section -->
-    <section class="section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why Choose Us?</h2>
-                <p class="section-subtitle">We provide the best hosting experience for your subdomain</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Instant Setup</h3>
-                    <p>Your domain is activated immediately after payment. No waiting periods or delays.</p>
-                </div>
-                
-                <div class="feature-card fade-in">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Advanced Security</h3>
-                    <p>Free SSL certificates, Cloudflare protection, and DDoS mitigation included.</p>
-                </div>
-                
-                <div class="feature-card fade-in">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Our expert team is always ready to help you with any technical issues.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- three.js + interaction (ultra-light, no extra libs) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+      }
+    }
+  </script>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2 class="cta-title">Ready to Get Started?</h2>
-            <p class="cta-description">
-                Join thousands of satisfied users and get your premium subdomain today. 
-                No credit card required to sign up.
-            </p>
-            <a href="login.php" class="btn btn-secondary btn-large">
-                <i class="fas fa-rocket"></i>
-                Get Your Domain Now
-            </a>
-        </div>
-    </section>
+  <script type="module">
+    // --- Three.js interactive blob (abstract, fluid, mouse-aware) ---
+    import * as THREE from 'three';
 
-    <!-- Developer Section -->
-    <section class="developer-section" id="developer">
-        <div class="container">
-            <div class="developer-card">
-                <div class="feature-icon-wrapper">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h2 class="developer-name">Tnayem48</h2>
-                <p class="section-subtitle mb-0">
-                    Professional web development team creating innovative hosting solutions 
-                    and cutting-edge web applications.
-                </p>
-                <a href="https://torikul.zone.id" target="_blank" class="btn btn-secondary mt-2">
-                    <i class="fas fa-external-link-alt"></i>
-                    Visit Developer Website
-                </a>
-            </div>
-        </div>
-    </section>
+    // setup scene, camera, renderer (with alpha for gradient)
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    // no background — let body gradient show through
+    scene.background = null;
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">
-                        <i class="fas fa-globe"></i>
-                        TNxBD
-                    </div>
-                    <p class="footer-description">
-                        Premium subdomain hosting service with instant activation, 
-                        enterprise-grade security, and 24/7 support.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="footer-links-title">Services</h4>
-                    <ul class="footer-links-list">
-                        <li><a href="#domains" class="footer-link">Subdomain Hosting</a></li>
-                        <li><a href="#features" class="footer-link">Features</a></li>
-                        <li><a href="#developer" class="footer-link">Developer</a></li>
-                        <li><a href="login.php" class="footer-link">Login</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-links-title">Quick Links</h4>
-                    <ul class="footer-links-list">
-                        <li><a href="#home" class="footer-link">Home</a></li>
-                        <li><a href="#domains" class="footer-link">Domains</a></li>
-                        <li><a href="#features" class="footer-link">Features</a></li>
-                        <li><a href="#developer" class="footer-link">Developer</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-links-title">Get Started</h4>
-                    <ul class="footer-links-list">
-                        <li><a href="login.php" class="footer-link">Create Account</a></li>
-                        <li><a href="login.php" class="footer-link">Login</a></li>
-                        <li><a href="#domains" class="footer-link">Choose Domain</a></li>
-                        <li><a href="#features" class="footer-link">See Features</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> TNxBD. All rights reserved.</p>
-                <p>Developed by <a href="https://torikul.zone.id" target="_blank" style="color: var(--accent);">Tnayem48</a></p>
-            </div>
-        </div>
-    </footer>
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 5);
 
-    <script>
-        // Mobile Navigation Toggle
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        
-        if (navToggle && navMenu) {
-            navToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                navMenu.classList.toggle('active');
-                const icon = navToggle.querySelector('i');
-                if (icon) {
-                    icon.className = navMenu.classList.contains('active') 
-                        ? 'fas fa-times' 
-                        : 'fas fa-bars';
-                }
-            });
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                    navMenu.classList.remove('active');
-                    const icon = navToggle.querySelector('i');
-                    if (icon) {
-                        icon.className = 'fas fa-bars';
-                    }
-                }
-            });
-            
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    const icon = navToggle.querySelector('i');
-                    if (icon) {
-                        icon.className = 'fas fa-bars';
-                    }
-                });
-            });
-        }
-        
-        // Stats counter animation
-        function animateCounter() {
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach(counter => {
-                const text = counter.textContent;
-                const target = parseInt(text.replace('+', '').replace('%', '')) || 100;
-                const isPercentage = text.includes('%');
-                const increment = Math.ceil(target / 50);
-                let current = 0;
-                
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.textContent = isPercentage ? current + '%' : current + '+';
-                        setTimeout(updateCounter, 20);
-                    } else {
-                        counter.textContent = text;
-                    }
-                };
-                
-                updateCounter();
-            });
-        }
-        
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    
-                    // Animate stats when hero section is visible
-                    if (entry.target.classList.contains('hero')) {
-                        animateCounter();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
-                    window.scrollTo({
-                        top: targetElement.offsetTop - navHeight,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Add loading state to buttons on click
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (this.href && (this.href.includes('login.php') || this.href.includes('new-domain.php'))) {
-                    this.classList.add('loading');
-                    setTimeout(() => {
-                        this.classList.remove('loading');
-                    }, 1500);
-                }
-            });
-        });
-        
-        // Handle window resize
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            document.body.classList.add('resize-animation-stopper');
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                document.body.classList.remove('resize-animation-stopper');
-            }, 400);
-        });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // cap for performance
+    container.appendChild(renderer.domElement);
 
-        // Mouse move effect for domain cards (3D tilt) - only on non-touch devices
-        if (window.matchMedia('(hover: hover)').matches) {
-            document.querySelectorAll('.domain-card').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 25;
-                    const rotateY = (centerX - x) / 25;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                    
-                    // Update gradient position
-                    card.style.setProperty('--x', x + 'px');
-                    card.style.setProperty('--y', y + 'px');
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-                });
-            });
-        }
+    // --- lights (soft) ---
+    const ambient = new THREE.AmbientLight(0x404060);
+    scene.add(ambient);
+    const pointLight1 = new THREE.PointLight(0xaa88ff, 1, 8);
+    pointLight1.position.set(2, 3, 4);
+    scene.add(pointLight1);
+    const pointLight2 = new THREE.PointLight(0x5f3b8c, 1.2, 8);
+    pointLight2.position.set(-3, -1, 3);
+    scene.add(pointLight2);
 
-        // Ripple effect for buttons
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    position: absolute;
-                    border-radius: 50%;
-                    background-color: rgba(255, 255, 255, 0.4);
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
+    // --- blob mesh with custom shader (reactive, wobbly) ---
+    const geometry = new THREE.SphereGeometry(1.4, 64, 64); // smooth but not too heavy
 
-        // Prevent body scroll when mobile menu is open
-        if (navMenu) {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.attributeName === 'class') {
-                        if (navMenu.classList.contains('active')) {
-                            document.body.style.overflow = 'hidden';
-                        } else {
-                            document.body.style.overflow = '';
-                        }
-                    }
-                });
-            });
-            
-            observer.observe(navMenu, { attributes: true });
-        }
-    </script>
+    // uniforms: time + mouse
+    const uniforms = {
+      time: { value: 0 },
+      mouse: { value: new THREE.Vector2(0.5, 0.5) },
+      color1: { value: new THREE.Color(0x9f7aea) },
+      color2: { value: new THREE.Color(0x4a2c5f) }
+    };
+
+    // vertex shader: displacement along normal using sin/cos + mouse influence
+    const vertexShader = `
+      varying float vDistort;
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      uniform float time;
+      uniform vec2 mouse;
+
+      void main() {
+        // basic wave distortion using position + time
+        float t = time * 1.2;
+        float distort = sin(position.x * 2.5 + t) * cos(position.y * 2.0 + t * 0.8) * sin(position.z * 2.2 + t * 1.1);
+        // mouse adds extra distortion (based on angle, simplified)
+        float mouseFactor = (mouse.x - 0.5) * 1.5; // -0.75 .. 0.75
+        distort += mouseFactor * sin(position.y * 4.0 + time * 2.0) * 0.4;
+        distort *= 0.35; // intensity
+
+        vec3 displaced = position + normal * distort;
+        vDistort = distort;
+        vNormal = normal;
+        vPosition = displaced;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      varying float vDistort;
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      uniform vec3 color1;
+      uniform vec3 color2;
+      uniform float time;
+
+      void main() {
+        // soft gradient based on distortion and normals
+        float mixVal = (vDistort * 1.5 + 0.5) + sin(vPosition.x * 2.0 + time) * 0.1;
+        vec3 baseColor = mix(color1, color2, mixVal);
+        // add subtle iridescence
+        float glow = 0.5 + 0.5 * sin(vPosition.y * 8.0 + time * 2.0);
+        vec3 finalColor = mix(baseColor, vec3(0.9, 0.7, 1.0), glow * 0.2);
+        // transparency to let gradient breathe
+        gl_FragColor = vec4(finalColor, 0.65);
+      }
+    `;
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      transparent: true,
+      wireframe: false,
+      side: THREE.DoubleSide,
+      blending: THREE.NormalBlending
+    });
+
+    const blob = new THREE.Mesh(geometry, material);
+    scene.add(blob);
+
+    // subtle rotation so it's not static
+    blob.rotation.x = 0.2;
+    blob.rotation.y = 0.5;
+
+    // mouse tracking (normalized)
+    const mouse = new THREE.Vector2(0.5, 0.5);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX / window.innerWidth;
+      mouse.y = e.clientY / window.innerHeight;
+      // update uniform
+      uniforms.mouse.value.set(mouse.x, mouse.y);
+      
+      // also rotate blob slightly with mouse (makes it reactive)
+      blob.rotation.y = 0.5 + (mouse.x - 0.5) * 0.8;
+      blob.rotation.x = 0.2 + (mouse.y - 0.5) * 0.4;
+    });
+
+    // resize handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // animation loop
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      uniforms.time.value += delta;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // --- Preloader removal (brief loading) ---
+    window.addEventListener('load', () => {
+      // after everything loaded, add class to fade preloader
+      setTimeout(() => {
+        document.body.classList.add('loaded');
+      }, 800); // keep it elegant, not too short
+    });
+
+    // --- Gateway logic (Enter → Redirecting → Proceed) ---
+    const exploreBtn = document.getElementById('mainActionBtn');
+    const statusArea = document.getElementById('statusArea');
+    const proceedContainer = document.getElementById('proceedContainer');
+    const buttonWrapper = document.getElementById('buttonWrapper');
+
+    exploreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // hide explore button, show redirecting status
+      exploreBtn.style.display = 'none';
+      statusArea.style.display = 'flex';
+
+      // after 1.8s (elegant pause), hide status and show proceed button
+      setTimeout(() => {
+        statusArea.style.display = 'none';
+        proceedContainer.style.display = 'block';
+        // optional: add small fade for proceed
+        proceedContainer.style.animation = 'fadeUp 0.5s ease forwards';
+      }, 1800);
+    });
+
+    // optional: if user wants to see original button again? not needed, but we can add a tiny reset? no — matches spec.
+
+    // tiny performance: disable right click context for cleaner look? (optional)
+    window.addEventListener('contextmenu', e => e.preventDefault());
+  </script>
+
+  <!-- fallback for very old browsers: no three, but still works -->
+  <noscript>
+    <div style="position:fixed; bottom:20px; color:white;">enable JS for full experience</div>
+  </noscript>
 </body>
 </html>
